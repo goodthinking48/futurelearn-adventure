@@ -11,7 +11,8 @@ print("\n\n" + "Welcome to the Haunted House!" + "\n")
 print("Available commands are: eat, fight, give, hug, smell, take, talk")
 print("Also: north, south, east, west")
 print("Also: quit or q" + "\n")
-print("Not all items and conversations are useful, but most are." + "\n")
+print("Not all items and conversations are useful, but most are,")
+print("and Teddy has good advice in several situations." + "\n")
 print("You win by finding the treasure vault (or by fighting a lot)." + "\n")
 print("'...' means 'Press Enter to continue.'"  "\n")
 input("...")
@@ -28,7 +29,7 @@ while True:
 	print("\n")
 	current_room.display_details()
 	if current_room == vault:
-		print("You have found the treasure! You have won.")
+		print("You have won the game by finding the treasure!")
 		break
 	
 	room_item = current_room.get_item()
@@ -62,6 +63,7 @@ while True:
 			inhabitant.talk()
 			if inhabitant == cora_friend:
 				dining_hall.link_room(vault, "south")
+				teddy.set_conversation(teddy_says[3])
 		elif command == "hug":
 			inhabitant.hug()
 		elif command == "give":
@@ -74,6 +76,7 @@ while True:
 				backpack.remove(gift)
 				if inhabitant == cora:
 					ballroom.has_locked_door = False
+					teddy.set_conversation(teddy_says[2])
 			if gift_liked and inhabitant.friendly_character is not None:
 				current_room.set_character(inhabitant.friendly_character)
 		elif command == "fight":
@@ -90,6 +93,7 @@ while True:
 				print("Cora swirls away to the other side of the room.")
 				ballroom.has_locked_door = False
 				backpack.remove("torch")
+				teddy.set_conversation(teddy_says[1])
 			if inhabitant == davos and inhabitant.defeats == 4:
 				print("Davos trips on the broom and flies head over heels." + "\n")
 			if inhabitant == diamond.get_owner() and inhabitant.defeats == 4:

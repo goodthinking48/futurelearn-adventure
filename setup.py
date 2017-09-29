@@ -10,7 +10,8 @@ cheese.set_smell("The cheese smells sharp and fresh.")
 diamond = rpg.Item("diamond", "A tiny, sparkling diamond.")
 
 orchid = rpg.Item("orchid", "A rare, indigo-blue orchid - very pretty.")
-orchid.set_smell("A strong, sweet scent. Ohhhhhhhh... it's a hyacinth.")
+orchid.set_smell("A strong, sweet scent. " + "\n" +
+                 "Ohhhhhhhh... my mistake, it's a hyacinth.")
 hyacinth = rpg.Item("hyacinth", "A common hyacinth.")
 hyacinth.set_smell("A strong, sweet scent.")
 
@@ -42,10 +43,14 @@ cora.set_weakness(torch)
 cora.set_wants(diamond)
 
 teddy = rpg.Friend("Teddy", "A small, friendly bear cub, with soft brown fur.")
-teddy_says = "This house is haunted ... " + "\n"
-teddy_says += "Watch out for Lady Cora's ghost! She's angry! I don't know why." + "\n" 
-teddy_says += "But don't worry, bright lights scare her."
-teddy.set_conversation(teddy_says)
+teddy_says = ["This house is haunted... " + "\n" +
+              "Watch out for Lady Cora's ghost! She's angry! I don't know why." + "\n" +
+              "But don't worry, bright lights scare her.",
+              "If you want to fight the butler, " + "\n" +
+              "you'll need a weapon with a good long handle.",
+              "Talk to Cora - she wants to say thank you.",
+              "Well done! Now have a look at that treasure!"]
+teddy.set_conversation(teddy_says[0])
 
 # Rooms
 kitchen = rpg.Room("Kitchen")
