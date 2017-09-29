@@ -9,8 +9,8 @@ cheese.set_smell("The cheese smells sharp and fresh.")
 
 diamond = rpg.Item("diamond", "A tiny, sparkling diamond.")
 
-orchid = rpg.Item("orchid", "A rare, indigo blue orchid - very pretty.")
-orchid.set_smell("Ohhhhhhhh. It's a hyacinth.")
+orchid = rpg.Item("orchid", "A rare, indigo-blue orchid - very pretty.")
+orchid.set_smell("Ohhhhhhhh... it's a hyacinth.")
 hyacinth = rpg.Item("hyacinth", "A common hyacinth.")
 hyacinth.set_smell("A strong, sweet scent.")
 
@@ -21,6 +21,12 @@ torch = rpg.Item("torch", "An ultra-bright electric torch.")
 davos = rpg.Enemy("Davos", "An ancient and crumbling butler.")
 davos.set_conversation("Brrlgrh... rgrhl... brains..." +
                        "\n" + "(Oh dear, Davos doesn't sound too well.)")
+davos.set_attack_moves(["lurches forward, arms outstretched.",
+                        "thrashes around the room, punching everything in his path.",
+                        "wobbles mightily, before trying to kill you again.",
+                        "throws himself forward once more.",
+                        "is still flat on his back from last time, but seizes" + "\n" +
+                        "his chance to grab you by the ankle and try to eat your foot."])
 davos.set_weakness(broom)
 davos.set_wants(cheese)
 diamond.set_owner(davos)
@@ -44,7 +50,6 @@ teddy.set_conversation(teddy_says)
 kitchen = rpg.Room("Kitchen")
 kitchen.set_description("A spotlessly clean room, big enough for forty cooks.")
 kitchen.set_character(davos)
-#kitchen.set_item(broom)
 
 dining_hall = rpg.Room("Dining Hall")
 dining_hall.set_description("A long, high-ceilinged room panelled in oak.")
@@ -88,8 +93,8 @@ dining_hall.link_room(kitchen, "north")
 dining_hall.link_room(ballroom, "west")
 ballroom.link_room(dining_hall, "east")
 
-conservatory.link_room(ballroom, "east")
-ballroom.link_room(conservatory, "west")
+conservatory.link_room(ballroom, "south")
+ballroom.link_room(conservatory, "north")
 
 terrace.link_room(conservatory, "south")
 conservatory.link_room(terrace, "north")

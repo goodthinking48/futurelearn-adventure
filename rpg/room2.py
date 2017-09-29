@@ -42,7 +42,7 @@ class Room():
 		title = "The " + self.get_name()
 		print(title)
 		print('-' * len(title))
-		print(self.get_description())
+		print(self.get_description() + "\n")
 		for direction in self.linked_rooms:
 			room = self.linked_rooms[direction]
 			if room == None:
@@ -51,10 +51,10 @@ class Room():
 		print()
 
 	def move(self, direction):
-		if self.linked_rooms[direction].name == "Conservatory" and self.has_locked_door:
+		if self.get_name() == "Ballroom" and self.has_locked_door and direction == "north":
 			print("A whirlwind of icy air throws you back. Cora glares at you.")
 			return self
-		if direction in self.linked_rooms:
+		elif direction in self.linked_rooms:
 			return self.linked_rooms[direction]
 		else:
 			print("You can't go that way")

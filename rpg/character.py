@@ -45,8 +45,9 @@ class Enemy(Character):
 		# to make an Enemy, first make a Character object
 		# and then we'll customise it.
 		super().__init__(char_name, char_description)
-		self.weakness = None					# Item object
+		self.weakness = None						# Item object
 		self.defeats = 0
+		self.attack_moves = None					# List of strings
 		self.wants = None							# Item object
 		self.friendly_character = None				# Character object
 		
@@ -68,6 +69,9 @@ class Enemy(Character):
 	def set_weakness(self, char_weakness):
 		self.weakness = char_weakness
 		
+	def set_attack_moves(self, list_of_moves):
+		self.attack_moves = list_of_moves
+		
 	def give(self, gift_item):
 		# gift_item is a string
 		if self.wants.get_name() == gift_item:
@@ -79,6 +83,9 @@ class Enemy(Character):
 
 	def fight(self, combat_item):
 		# combat_item is a string
+		if self.attack_moves is not None and self.defeats < len(self.attack_moves):
+			print(self.name + " " + self.attack_moves[self.defeats] + "\n")
+			
 		if self.weakness.get_name() == combat_item:
 			print("You fend " + self.name + " off with the " + combat_item + ".")
 			self.defeats += 1
