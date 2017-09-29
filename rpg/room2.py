@@ -5,6 +5,7 @@ class Room():
 		self.linked_rooms = {}
 		self.character = None
 		self.item = None
+		self.has_locked_door = False
 
 	def set_description(self, room_description):
 		self.description = room_description
@@ -44,10 +45,15 @@ class Room():
 		print(self.get_description())
 		for direction in self.linked_rooms:
 			room = self.linked_rooms[direction]
+			if room == None:
+                                continue
 			print("The " + room.get_name() + " is " + direction)
 		print()
 
 	def move(self, direction):
+		if self.linked_rooms[direction].name == "Conservatory" and self.has_locked_door:
+			print("A whirlwind of icy air throws you back. Cora glares at you.")
+			return self
 		if direction in self.linked_rooms:
 			return self.linked_rooms[direction]
 		else:

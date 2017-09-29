@@ -19,7 +19,7 @@ class Item():
 
 	def get_smell(self):
 		if self.smell == None:
-			return "You can't smell anything."
+			return "It doesn't really smell of anything."
 		else:
 			return self.smell
 

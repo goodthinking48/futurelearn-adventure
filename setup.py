@@ -9,7 +9,10 @@ cheese.set_smell("The cheese smells sharp and fresh.")
 
 diamond = rpg.Item("diamond", "A tiny, sparkling diamond.")
 
-orchid = rpg.Item("orchid", "A rare, blue orchid - very pretty.")
+orchid = rpg.Item("orchid", "A rare, indigo blue orchid - very pretty.")
+orchid.set_smell("Ohhhhhhhh. It's a hyacinth.")
+hyacinth = rpg.Item("hyacinth", "A common hyacinth.")
+hyacinth.set_smell("A strong, sweet scent.")
 
 torch = rpg.Item("torch", "An ultra-bright electric torch.")
 
@@ -17,7 +20,7 @@ torch = rpg.Item("torch", "An ultra-bright electric torch.")
 # Characters
 davos = rpg.Enemy("Davos", "An ancient and crumbling butler.")
 davos.set_conversation("Brrlgrh... rgrhl... brains..." +
-                       "\n" + "(Oh dear!)")
+                       "\n" + "(Oh dear, Davos doesn't sound too well.)")
 davos.set_weakness(broom)
 davos.set_wants(cheese)
 diamond.set_owner(davos)
@@ -32,27 +35,29 @@ cora.set_weakness(torch)
 cora.set_wants(diamond)
 
 teddy = rpg.Friend("Teddy", "A small, friendly bear cub, with soft brown fur.")
-teddy_says = "This house is haunted ... the ghost of Lady Cora is in the ballroom."
-teddy_says += "\n" + "And she's angry! I don't know why. But don't worry, "
-teddy_says += "bright lights scare her."
+teddy_says = "This house is haunted ... " + "\n"
+teddy_says += "Watch out for Lady Cora's ghost! She's angry! I don't know why." + "\n" 
+teddy_says += "But don't worry, bright lights scare her."
 teddy.set_conversation(teddy_says)
 
 # Rooms
 kitchen = rpg.Room("Kitchen")
-kitchen.set_description("A pretty and clean room in the farmhouse style.")
+kitchen.set_description("A spotlessly clean room, big enough for forty cooks.")
 kitchen.set_character(davos)
-kitchen.set_item(broom)
+#kitchen.set_item(broom)
 
 dining_hall = rpg.Room("Dining Hall")
 dining_hall.set_description("A long, high-ceilinged room panelled in oak.")
 dining_hall.set_character(teddy)
 
 ballroom = rpg.Room("Ballroom")
-ballroom.set_description("A vast, echoing space, with splendid golden decorations.")
+ballroom.set_description("A vast room with a shining floor and splendid golden decorations.")
+ballroom.has_locked_door = True
 ballroom.set_character(cora)
 
 pantry = rpg.Room("Pantry")
-pantry.set_description("Cool, shaded storage.")
+
+pantry.set_description("Cool, shaded storage for food.")
 pantry.set_item(cheese)
 
 broom_cupboard = rpg.Room("Broom Cupboard")
@@ -65,6 +70,11 @@ vault.set_description("A dead end. This tiny room is full of gold and jewels!")
 conservatory = rpg.Room("Conservatory")
 conservatory.set_description("Palm fronds and flowers fill this decorative glass-house.")
 conservatory.set_item(orchid)
+
+terrace = rpg.Room("Terrace")
+terrace.set_description("Just outside the house, a little viewing terrace with a stone balustrade." + "\n" +
+                        "Beyond you see rose gardens, deer parks, fountains, peacocks etc, etc, etc.")
+terrace.set_item(broom)
 
 broom_cupboard.link_room(kitchen, "west")
 kitchen.link_room(broom_cupboard, "east")
@@ -80,3 +90,6 @@ ballroom.link_room(dining_hall, "east")
 
 conservatory.link_room(ballroom, "east")
 ballroom.link_room(conservatory, "west")
+
+terrace.link_room(conservatory, "south")
+conservatory.link_room(terrace, "north")
