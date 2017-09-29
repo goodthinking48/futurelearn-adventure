@@ -10,7 +10,7 @@ cheese.set_smell("The cheese smells sharp and fresh.")
 diamond = rpg.Item("diamond", "A tiny, sparkling diamond.")
 
 orchid = rpg.Item("orchid", "A rare, indigo-blue orchid - very pretty.")
-orchid.set_smell("Ohhhhhhhh... it's a hyacinth.")
+orchid.set_smell("A strong, sweet scent. Ohhhhhhhh... it's a hyacinth.")
 hyacinth = rpg.Item("hyacinth", "A common hyacinth.")
 hyacinth.set_smell("A strong, sweet scent.")
 
@@ -20,7 +20,8 @@ torch = rpg.Item("torch", "An ultra-bright electric torch.")
 # Characters
 davos = rpg.Enemy("Davos", "An ancient and crumbling butler.")
 davos.set_conversation("Brrlgrh... rgrhl... brains..." +
-                       "\n" + "(Oh dear, Davos doesn't sound too well.)")
+                       "\n" + "(Oh dear, Davos doesn't sound too well. Best " +
+                         "keep your distance.)")
 davos.set_attack_moves(["lurches forward, arms outstretched.",
                         "thrashes around the room, punching everything in his path.",
                         "wobbles mightily, before trying to kill you again.",
