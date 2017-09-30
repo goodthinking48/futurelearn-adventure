@@ -6,6 +6,7 @@ broom.set_smell("The broom smells of pine and rosemary.")
 
 cheese = rpg.Item("cheese", "A nice bit of crumbly cheese.")
 cheese.set_smell("The cheese smells sharp and fresh.")
+cheese.set_edibility(True)
 
 diamond = rpg.Item("diamond", "A tiny, sparkling diamond.")
 

@@ -4,6 +4,7 @@ class Item():
 		self.description = item_description
 		self.smell = None
 		self.owner = None
+		self.is_edible = False
 
 	def get_description(self):
 		return self.description
@@ -26,11 +27,25 @@ class Item():
 	def set_smell(self, item_smell):
 		self.smell = item_smell
 		
+	def set_edibility(self, edible=False):
+		self.is_edible = edible
+		
 	def get_owner(self):
 		return self.owner
 		
 	def set_owner(self, character):
 		self.owner = character
 		
+	def eat_it(self, backpack):
+		if self.is_edible:
+			print("Delicious!")
+			backpack.remove(self.get_name())
+		else:
+			print("You can't eat that!")
+		return backpack
+		
+	def smell_it(self):
+		print(self.get_smell())
+
 	def describe(self):
 		print("You see: " + self.get_description(), end="\n\n")
