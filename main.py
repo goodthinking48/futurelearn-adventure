@@ -29,7 +29,7 @@ while True:
 	print("\n")
 	current_room.display_details()
 	if current_room == vault:
-		print("You have won the game by finding the treasure!")
+		print("You have won the game by finding the treasure!" + "\n")
 		break
 	
 	room_item = current_room.get_item()
@@ -121,7 +121,7 @@ while True:
 				current_room.set_item(hyacinth)
 				room_item = hyacinth
 		else:
-			print("You cant't smell anything much.")
+			print("You can't smell anything much.")
 	
 	elif command in ["quit", "q"]:
 		break
