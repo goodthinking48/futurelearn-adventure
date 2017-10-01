@@ -27,6 +27,7 @@ while True:
 		input("...")
 
 
+
 	# Display room and contents
 	print("\n")
 	current_room.display_details()						
@@ -47,15 +48,17 @@ while True:
 		print("In your backpack: " + carried_item_list, end="\n\n")
 		
 		
+		
 	# Set Teddy's advice
 	if ballroom.has_blocked_door == False:
 		teddy.set_conversation(teddy.says["davos"])
-	if diamond.get_owner() == None:
+	if not davos.owns == "diamond":
 		teddy.set_conversation(teddy.says["diamond"])
-	if diamond.get_owner() == cora_friend:
+	if cora_friend.owns == "diamond":
 		teddy.set_conversation(teddy.says["thanks"])
 	if "south" in dining_hall.linked_rooms:
 		teddy.set_conversation(teddy.says["treasure"])
+
 
 
 	# Get command and deal with common mistakes
@@ -69,9 +72,10 @@ while True:
 		print("There's nothing to " + command + " here.")
 		continue
 		
-	if command in ['eat'] and len(backpack) == 0:
+	if command in ['eat', 'give'] and len(backpack) == 0:
 		print("You don't have anything to " + command + ".")
 		continue
+	
 	
 	
 	# Run commands
@@ -87,7 +91,7 @@ while True:
 	elif command == "talk":
 		consequence = inhabitant.talk()
 		if consequence == "Cora opens the vault":
-			pass		# move vault opening code here
+			dining_hall.link_room(vault, "south")
 			
 			
 	elif command == "hug":
@@ -99,15 +103,12 @@ while True:
 		if gift not in backpack:
 			print("You haven't got that.")
 			continue
-		gift_liked = inhabitant.give(gift)
-		if gift_liked:
+		consequence = inhabitant.give(gift, current_room)
+		if consequence is not None:
 			backpack.remove(gift)
-			if inhabitant == cora:
-				ballroom.has_blocked_door = False
-				diamond.set_owner(cora_friend)
-		if gift_liked and inhabitant.friendly_character is not None:
-			current_room.set_character(inhabitant.friendly_character)
-			
+		if consequence == "Cora opens the conservatory":
+			ballroom.has_blocked_door = False
+						
 			
 	elif command == "fight":
 		weapon = input("What do you want to fight with? ")
@@ -125,10 +126,10 @@ while True:
 			backpack.remove("torch")
 		if inhabitant == davos and inhabitant.defeats == 4:
 			print("Davos trips on the broom and flies head over heels." + "\n")
-		if inhabitant == diamond.get_owner() and inhabitant.defeats == 4:
+		if inhabitant.owns == "diamond" and inhabitant.defeats == 4:
 			print("Something glitters as it falls to the floor.")
 			current_room.set_item(diamond)
-			diamond.set_owner(None)
+			inhabitant.owns = None
 		if inhabitant == davos and inhabitant.defeats == 5:
 			print("\n" + "Davos fixes you with a look of withering contempt, before" + "\n" +
 			      "hauling himself off to the terrace for a nice rest." + "\n")

@@ -4,9 +4,9 @@ class Character():
 	def __init__(self, char_name, char_description):
 		self.name = char_name
 		self.description = char_description
+		self.owns = None				# name of Item object
 		self.conversation = None
 		self.says = {}					# dictionary = {topic: conversation}
-		self.doorway = []				# list of tuples (room, room_to_link, dir)
 
 	# Describe this character
 	def describe(self):
@@ -16,6 +16,10 @@ class Character():
 	# Set what this character will say when talked to
 	def set_conversation(self, conversation):
 		self.conversation = conversation
+		
+	# Set an Item object that this character owns
+	def set_owns(self, item_object):
+		self.owns = item_object
 
 	# Talk to this character
 	def talk(self):
@@ -24,14 +28,9 @@ class Character():
 		else:
 			print(self.name + " doesn't want to talk to you")
 			
-		if self.conversation.find("opened the secret vault") > -1:
-			self.open_door()
+		if self.conversation.startswith("I've opened the secret vault"):
+			return "Cora opens the vault"
 			
-	# Character opens the way between two rooms
-	def open_door(self):
-		if len(self.doorway) > 0:
-			for room1, room2, direction in self.doorway:
-				room1.link_room(room2, direction)
 			
 	# Fight with this character
 	def fight(self, combat_item):
@@ -83,17 +82,23 @@ class Enemy(Character):
 	def set_attack_moves(self, list_of_moves):
 		self.attack_moves = list_of_moves
 		
-	def give(self, gift_item):
-		# gift_item is a string
+	def give(self, gift_item, current_room):
+		# Gift_item is a string. Correct gift turns enemy into friend.
+		consequence = None
 		if self.wants.get_name() == gift_item:
 			print(self.name + " is delighted with the " + gift_item + ".")
-			return True
+			consequence = "Gift accepted"
+			if self.friendly_character is not None:
+				current_room.set_character(self.friendly_character)
+			if self.name == "Cora" and gift_item == "diamond":
+				self.friendly_character.set_owns("diamond")
+				consequence = "Cora opens the conservatory"
 		else:
 			print(self.name + " angrily rejects the " + gift_item + ".")
-			return False
+		return consequence
 
 	def fight(self, combat_item):
-		# combat_item is a string
+		# Combat_item is a string
 		if self.attack_moves is not None and self.defeats < len(self.attack_moves):
 			print(self.name + " " + self.attack_moves[self.defeats] + "\n")
 			
@@ -109,7 +114,7 @@ class Enemy(Character):
 		
 class Friend(Character):
 	def __init__(self, char_name, char_description):
-		# to make a Friend, first make a Character object
+		# To make a Friend, first make a Character object
 		# and then we'll customise it.
 		super().__init__(char_name, char_description)
 		

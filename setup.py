@@ -33,11 +33,10 @@ davos.set_attack_moves(["lurches forward, arms outstretched.",
                         "his chance to grab you by the ankle and try to eat your foot."])
 davos.set_weakness(broom)
 davos.set_wants(cheese)
-diamond.set_owner(davos)
+davos.set_owns("diamond")
 
 cora_friend = rpg.Friend("Cora", "A blithe spirit.")
 cora_friend.set_conversation("I've opened the secret vault - have a look!")
-		# cora_friend: see also Room links below, also self.talk in character.py
 
 cora = rpg.Enemy("Cora", "The restless, ghostly presence of a young lady.")
 cora.set_conversation("Thief! Give me back my diamond!")
@@ -65,7 +64,6 @@ kitchen.set_character(davos)
 dining_hall = rpg.Room("Dining Hall")
 dining_hall.set_description("A long, high-ceilinged room panelled in oak.")
 dining_hall.set_character(teddy)
-#dining_hall.set_item(diamond) 					#get rid
 
 ballroom = rpg.Room("Ballroom")
 ballroom.set_description("A vast room with a shining floor and splendid golden decorations.")
@@ -113,5 +111,3 @@ ballroom.link_room(conservatory, "north")
 terrace.link_room(conservatory, "south")
 conservatory.link_room(terrace, "north")
 
-cora_friend.doorway = [(dining_hall, vault, "south"),
-                       (vault, dining_hall, "north")]
