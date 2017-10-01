@@ -5,6 +5,8 @@ class Character():
 		self.name = char_name
 		self.description = char_description
 		self.conversation = None
+		self.says = {}					# dictionary = {topic: conversation}
+		self.doorway = []				# list of tuples (room, room_to_link, dir)
 
 	# Describe this character
 	def describe(self):
@@ -21,7 +23,16 @@ class Character():
 			print("[" + self.name + " says]: " + self.conversation)
 		else:
 			print(self.name + " doesn't want to talk to you")
-
+			
+		if self.conversation.find("opened the secret vault") > -1:
+			self.open_door()
+			
+	# Character opens the way between two rooms
+	def open_door(self):
+		if len(self.doorway) > 0:
+			for room1, room2, direction in self.doorway:
+				room1.link_room(room2, direction)
+			
 	# Fight with this character
 	def fight(self, combat_item):
 		print(self.name + " doesn't want to fight with you")

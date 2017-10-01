@@ -3,7 +3,7 @@ from setup import *
 
 
 backpack = []
-current_room = conservatory
+current_room = dining_hall
 command = ""
 
 print("\n\n" + "Welcome to the Haunted House!" + "\n")
@@ -20,18 +20,17 @@ input("...")
 
 while True:
 	
-	# Previous content to be read before moving on
+	# Wait for input to allow previous activity to be read.
 	if command in ["eat", "fight", "give", "hug", "smell", "talk"]:
 		input("...")
-	elif current_room == ballroom and ballroom.has_locked_door and command == "north":
+	elif current_room == ballroom and ballroom.has_blocked_door and command == "north":
 		input("...")
 
 
 	# Display room and contents
 	print("\n")
-	current_room.display_details()
-	# TO DO: MOVE THIS
-	if current_room == vault:
+	current_room.display_details()						
+	if current_room == vault:						# to do: move
 		print("You have won the game by finding the treasure!" + "\n")
 		break
 	
@@ -46,6 +45,17 @@ while True:
 	if len(backpack) > 0:
 		carried_item_list = ", ".join(backpack)
 		print("In your backpack: " + carried_item_list, end="\n\n")
+		
+		
+	# Set Teddy's advice
+	if ballroom.has_blocked_door == False:
+		teddy.set_conversation(teddy.says["davos"])
+	if diamond.get_owner() == None:
+		teddy.set_conversation(teddy.says["diamond"])
+	if diamond.get_owner() == cora_friend:
+		teddy.set_conversation(teddy.says["thanks"])
+	if "south" in dining_hall.linked_rooms:
+		teddy.set_conversation(teddy.says["treasure"])
 
 
 	# Get command and deal with common mistakes
@@ -75,10 +85,9 @@ while True:
 
 	
 	elif command == "talk":
-		inhabitant.talk()
-		if inhabitant == cora_friend:
-			dining_hall.link_room(vault, "south")
-			teddy.set_conversation(teddy_says[3])
+		consequence = inhabitant.talk()
+		if consequence == "Cora opens the vault":
+			pass		# move vault opening code here
 			
 			
 	elif command == "hug":
@@ -94,8 +103,8 @@ while True:
 		if gift_liked:
 			backpack.remove(gift)
 			if inhabitant == cora:
-				ballroom.has_locked_door = False
-				teddy.set_conversation(teddy_says[2])
+				ballroom.has_blocked_door = False
+				diamond.set_owner(cora_friend)
 		if gift_liked and inhabitant.friendly_character is not None:
 			current_room.set_character(inhabitant.friendly_character)
 			
@@ -112,9 +121,8 @@ while True:
 		if inhabitant == cora:
 			print("\n" + "The torch flies from your hand and shatters on the floor.")
 			print("Cora swirls away to the other side of the room.")
-			ballroom.has_locked_door = False
+			ballroom.has_blocked_door = False
 			backpack.remove("torch")
-			teddy.set_conversation(teddy_says[1])
 		if inhabitant == davos and inhabitant.defeats == 4:
 			print("Davos trips on the broom and flies head over heels." + "\n")
 		if inhabitant == diamond.get_owner() and inhabitant.defeats == 4:
@@ -131,20 +139,16 @@ while True:
 			
 			
 	elif command == "eat":
-		if "cheese" in backpack:
-			backpack = cheese.eat_it(backpack)
-		else:
-			print("You're not carrying any food.")
+		backpack = cheese.eat_it(backpack)
 			
 				
 	elif command =="smell":
-		room_item.smell_it()
-		if room_item == orchid:
-			current_room.set_item(hyacinth)
-			room_item = hyacinth
+		room_item.smell_it(current_room)
 	
 	
 	elif command in ["quit", "q"]:
 		break
+		
+		
 	else:
 		print("I don't understand.")
