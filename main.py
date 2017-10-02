@@ -79,7 +79,7 @@ while True:
 					teddy.set_conversation(teddy_says[2])
 			if gift_liked and inhabitant.friendly_character is not None:
 				current_room.set_character(inhabitant.friendly_character)
-	elif command == "fight":
+		elif command == "fight":
 			weapon = input("What do you want to fight with? ")
 			if weapon not in backpack:
 				print("You don't have that!")
