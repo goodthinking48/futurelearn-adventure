@@ -4,7 +4,6 @@ from setup import *
 
 backpack = []
 current_room = dining_hall
-command = ""
 
 print("\n\n" + "Welcome to the Haunted House!" + "\n")
 print("Available commands are: eat, fight, give, hug, smell, take, talk")
@@ -22,10 +21,7 @@ while True:
 
 	# Display room and contents
 	print("\n")
-	current_room.display_details()						
-	if current_room == vault:						# to do: move
-		print("You have won the game by finding the treasure!" + "\n")
-		break
+	current_room.display_details()
 	
 	room_item = current_room.get_item()
 	if room_item is not None:
@@ -41,7 +37,6 @@ while True:
 		
 
 
-	# Get command
 	command = input("> ").lower()
 	
 	# Deal with missing items and characters
@@ -70,8 +65,9 @@ while True:
 
 	
 	elif command == "talk":
-		consequence = inhabitant.talk()
-		if consequence == "Cora opens the vault":
+		inhabitant.talk()
+		if inhabitant == cora_friend:
+			# Cora says thank you by opening the vault
 			dining_hall.link_room(vault, "south")
 			
 			
@@ -84,11 +80,9 @@ while True:
 		if gift not in backpack:
 			print("You haven't got that.")
 			continue
-		consequence = inhabitant.give(gift, current_room)
-		if consequence is not None:
+		gift_liked = inhabitant.give(gift, current_room)
+		if gift_liked:
 			backpack.remove(gift)
-		if consequence == "Cora opens the conservatory":
-			ballroom.has_blocked_door = False
 						
 			
 	elif command == "fight":
@@ -97,23 +91,18 @@ while True:
 			print("You don't have that!")
 			continue
 		fight_won = inhabitant.fight(weapon)
+		
 		if not fight_won:
 			print("\n" + "Game over!" + "\n")
 			break
-		if inhabitant == cora:
-			print("\n" + "The torch flies from your hand and shatters on the floor.")
-			print("Cora swirls away to the other side of the room.")
+		if inhabitant == cora and inhabitant.defeats == 1:
 			ballroom.has_blocked_door = False
 			backpack.remove("torch")
-		if inhabitant == davos and inhabitant.defeats == 4:
-			print("Davos trips on the broom and flies head over heels." + "\n")
-		if inhabitant.owns == "diamond" and inhabitant.defeats == 4:
+		if inhabitant.owns == diamond and inhabitant.defeats == 4:
 			print("Something glitters as it falls to the floor.")
 			current_room.set_item(diamond)
 			inhabitant.owns = None
 		if inhabitant == davos and inhabitant.defeats == 5:
-			print("\n" + "Davos fixes you with a look of withering contempt, before" + "\n" +
-			      "hauling himself off to the terrace for a nice rest." + "\n")
 			current_room.set_character(None)
 			terrace.set_character(davos)
 			print("You have won the game by defeating the zombie butler!", end="\n\n")
@@ -140,9 +129,9 @@ while True:
 	# Set Teddy's advice
 	if ballroom.has_blocked_door == False:
 		teddy.set_conversation(teddy.says["davos"])
-	if not davos.owns == "diamond":
+	if not davos.owns == diamond:
 		teddy.set_conversation(teddy.says["diamond"])
-	if cora_friend.owns == "diamond":
+	if cora_friend.owns == diamond:
 		teddy.set_conversation(teddy.says["thanks"])
 	if "south" in dining_hall.linked_rooms:
 		teddy.set_conversation(teddy.says["treasure"])
@@ -154,3 +143,10 @@ while True:
 		input("...")
 	elif current_room == ballroom and ballroom.has_blocked_door and command == "north":
 		input("...")
+		
+		
+		
+	# The game is won by reaching the vault.					
+	if current_room == vault:
+		print("You have won the game by finding the treasure!" + "\n")
+		break

@@ -20,6 +20,7 @@ orchid.set_alternate(hyacinth)
 torch = rpg.Item("torch", "An ultra-bright electric torch.")
 
 
+
 # Characters
 davos = rpg.Enemy("Davos", "An ancient and crumbling butler.")
 davos.set_conversation("Brrlgrh... rgrhl... brains..." +
@@ -31,18 +32,25 @@ davos.set_attack_moves(["lurches forward, arms outstretched.",
                         "throws himself forward once more.",
                         "is still flat on his back from last time, but seizes" + "\n" +
                         "his chance to grab you by the ankle and try to eat your foot."])
+                        
+davos.set_post_attack(4, "Davos trips on the broom and flies head over heels.")
+davos.set_post_attack(5, "Davos fixes you with a look of withering contempt, before" +
+                         "\n" + "hauling himself off to the terrace for a nice rest")
+
 davos.set_weakness(broom)
 davos.set_wants(cheese)
-davos.set_owns("diamond")
+davos.set_owns(diamond)
 
 cora_friend = rpg.Friend("Cora", "A blithe spirit.")
 cora_friend.set_conversation("I've opened the secret vault - have a look!")
 
 cora = rpg.Enemy("Cora", "The restless, ghostly presence of a young lady.")
 cora.set_conversation("Thief! Give me back my diamond!")
-cora.set_friendly_character(cora_friend)
+cora.set_alter_ego(cora_friend)
 cora.set_weakness(torch)
 cora.set_wants(diamond)
+cora.set_post_attack(1, "The torch flies from your hand and shatters on the floor." +
+                        "\n" + "Cora swirls away to the other side of the room.")
 
 teddy = rpg.Friend("Teddy", "A small, friendly bear cub, with soft brown fur.")             
 teddy.says["cora"] = (   "This house is haunted... " + "\n" + 
@@ -55,6 +63,8 @@ teddy.says["diamond"] =  "You've found Cora's lost diamond! That's splendid!"
 teddy.says["thanks"] =   "Talk to Cora, she wants to say thank you."
 teddy.says["treasure"] = "Well done! Now have a look at that treasure!"
 teddy.set_conversation(teddy.says["cora"])
+
+
 
 # Rooms
 kitchen = rpg.Room("Kitchen")
@@ -90,6 +100,7 @@ terrace = rpg.Room("Terrace")
 terrace.set_description("Just outside the house, a little viewing terrace with a stone balustrade." + "\n" +
                         "Beyond you see rose gardens, deer parks, fountains, peacocks etc, etc, etc.")
 terrace.set_item(broom)
+
 
 
 # Room links
