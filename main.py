@@ -19,14 +19,6 @@ input("...")
 
 
 while True:
-	
-	# Wait for input to allow previous activity to be read.
-	if command in ["eat", "fight", "give", "hug", "smell", "talk"]:
-		input("...")
-	elif current_room == ballroom and ballroom.has_blocked_door and command == "north":
-		input("...")
-
-
 
 	# Display room and contents
 	print("\n")
@@ -44,26 +36,15 @@ while True:
 		inhabitant.describe()
 		
 	if len(backpack) > 0:
-		carried_item_list = ", ".join(backpack)
-		print("In your backpack: " + carried_item_list, end="\n\n")
+		carried_items = ", ".join(backpack)
+		print("In your backpack: " + carried_items, end="\n\n")
 		
-		
-		
-	# Set Teddy's advice
-	if ballroom.has_blocked_door == False:
-		teddy.set_conversation(teddy.says["davos"])
-	if not davos.owns == "diamond":
-		teddy.set_conversation(teddy.says["diamond"])
-	if cora_friend.owns == "diamond":
-		teddy.set_conversation(teddy.says["thanks"])
-	if "south" in dining_hall.linked_rooms:
-		teddy.set_conversation(teddy.says["treasure"])
 
 
-
-	# Get command and deal with common mistakes
+	# Get command
 	command = input("> ").lower()
 	
+	# Deal with missing items and characters
 	if command in ['hug', 'talk', 'give', 'fight'] and inhabitant == None:
 		print("There's no-one here.")
 		continue
@@ -153,3 +134,23 @@ while True:
 		
 	else:
 		print("I don't understand.")
+		
+		
+		
+	# Set Teddy's advice
+	if ballroom.has_blocked_door == False:
+		teddy.set_conversation(teddy.says["davos"])
+	if not davos.owns == "diamond":
+		teddy.set_conversation(teddy.says["diamond"])
+	if cora_friend.owns == "diamond":
+		teddy.set_conversation(teddy.says["thanks"])
+	if "south" in dining_hall.linked_rooms:
+		teddy.set_conversation(teddy.says["treasure"])
+		
+		
+	
+	# Wait for input to allow previous activity to be read.
+	if command in ["eat", "fight", "give", "hug", "smell", "talk"]:
+		input("...")
+	elif current_room == ballroom and ballroom.has_blocked_door and command == "north":
+		input("...")
