@@ -83,6 +83,8 @@ while True:
 		gift_liked = inhabitant.give(gift, current_room)
 		if gift_liked:
 			backpack.remove(gift)
+			if gift == "diamond" and inhabitant == cora:
+				cora_friend.owns = diamond
 						
 			
 	elif command == "fight":
@@ -127,9 +129,9 @@ while True:
 		
 		
 	# Set Teddy's advice
-	if ballroom.has_blocked_door == False:
+	if cora.defeats > 0:
 		teddy.set_conversation(teddy.says["davos"])
-	if not davos.owns == diamond:
+	if "diamond" in backpack:
 		teddy.set_conversation(teddy.says["diamond"])
 	if cora_friend.owns == diamond:
 		teddy.set_conversation(teddy.says["thanks"])
