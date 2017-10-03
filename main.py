@@ -1,11 +1,9 @@
 
 from setup import *
-from time import sleep
 
 
 backpack = []
 current_room = dining_hall
-command = ""
 
 print("\n\n" + "Welcome to the Haunted House!" + "\n")
 print("Available commands are: eat, fight, give, hug, smell, take, talk")
@@ -20,17 +18,10 @@ input("...")
 
 
 while True:
-	
-	if command in ["eat", "fight", "give", "hug", "smell", "talk"]:
-		input("...")
-	elif current_room == ballroom and ballroom.has_locked_door and command == "north":
-		input("...")
 
+	# Display room and contents
 	print("\n")
 	current_room.display_details()
-	if current_room == vault:
-		print("You have won the game by finding the treasure!")
-		break
 	
 	room_item = current_room.get_item()
 	if room_item is not None:
@@ -41,89 +32,121 @@ while True:
 		inhabitant.describe()
 		
 	if len(backpack) > 0:
-		carried_item_list = ", ".join(backpack)
-		print("In your backpack: " + carried_item_list, end="\n\n")
+		carried_items = ", ".join(backpack)
+		print("In your backpack: " + carried_items, end="\n\n")
 		
+
+
 	command = input("> ").lower()
 	
+	# Deal with missing items and characters
+	if command in ['hug', 'talk', 'give', 'fight'] and inhabitant == None:
+		print("There's no-one here.")
+		continue
+		
+	if command in ['smell', 'take', 'get'] and room_item == None:
+		print("There's nothing to " + command + " here.")
+		continue
+		
+	if command in ['eat', 'give'] and len(backpack) == 0:
+		print("You don't have anything to " + command + ".")
+		continue
+	
+	
+	
+	# Run commands
 	if command in ["north", "south", "east", "west"]:
 		current_room = current_room.move(command)
 
 		
 	elif command == "take" or command == "get":
-		if room_item is not None:
-			backpack.append(room_item.get_name())
-			current_room.set_item(None)
-		else:
-			print("I don't see that here.")
+		backpack.append(room_item.get_name())
+		current_room.set_item(None)
+
+	
+	elif command == "talk":
+		inhabitant.talk()
+		if inhabitant == cora_friend:
+			# Cora says thank you by opening the vault
+			dining_hall.link_room(vault, "south")
+			
+			
+	elif command == "hug":
+		inhabitant.hug()
 		
-	elif (command in ["talk", "hug", "give", "fight"] and
-		  inhabitant is not None):
-		if command == "talk":
-			inhabitant.talk()
-			if inhabitant == cora_friend:
-				dining_hall.link_room(vault, "south")
-				teddy.set_conversation(teddy_says[3])
-		elif command == "hug":
-			inhabitant.hug()
-		elif command == "give":
-			gift = input("What do you want to give? ")
-			if gift not in backpack:
-				print("You haven't got that.")
-				continue
-			gift_liked = inhabitant.give(gift)
-			if gift_liked:
-				backpack.remove(gift)
-				if inhabitant == cora:
-					ballroom.has_locked_door = False
-					teddy.set_conversation(teddy_says[2])
-			if gift_liked and inhabitant.friendly_character is not None:
-				current_room.set_character(inhabitant.friendly_character)
-		elif command == "fight":
-			weapon = input("What do you want to fight with? ")
-			if weapon not in backpack:
-				print("You don't have that!")
-				continue
-			fight_won = inhabitant.fight(weapon)
-			if not fight_won:
-				print("\n" + "Game over!" + "\n")
-				break
-			if inhabitant == cora:
-				print("\n" + "The torch flies from your hand and shatters on the floor.")
-				print("Cora swirls away to the other side of the room.")
-				ballroom.has_locked_door = False
-				backpack.remove("torch")
-				teddy.set_conversation(teddy_says[1])
-			if inhabitant == davos and inhabitant.defeats == 4:
-				print("Davos trips on the broom and flies head over heels." + "\n")
-			if inhabitant == diamond.get_owner() and inhabitant.defeats == 4:
-				print("Something glitters as it falls to the floor.")
-				current_room.set_item(diamond)
-				diamond.set_owner(None)
-			if inhabitant == davos and inhabitant.defeats == 5:
-				print("\n" + "Davos fixes you with a look of withering contempt, before" + "\n" +
-				      "hauling himself off to the terrace for a nice rest." + "\n")
-				current_room.set_character(None)
-				terrace.set_character(davos)
-				print("You have won the game by defeating the zombie butler!", end="\n\n")
-				print("(You can still find the treasure...)")
+		
+	elif command == "give":
+		gift = input("What do you want to give? ")
+		if gift not in backpack:
+			print("You haven't got that.")
+			continue
+		gift_liked = inhabitant.give(gift, current_room)
+		if gift_liked:
+			backpack.remove(gift)
+						
+			
+	elif command == "fight":
+		weapon = input("What do you want to fight with? ")
+		if weapon not in backpack:
+			print("You don't have that!")
+			continue
+		fight_won = inhabitant.fight(weapon)
+		
+		if not fight_won:
+			print("\n" + "Game over!" + "\n")
+			break
+		if inhabitant == cora and inhabitant.defeats == 1:
+			ballroom.has_blocked_door = False
+			backpack.remove("torch")
+		if inhabitant.owns == diamond and inhabitant.defeats == 4:
+			print("Something glitters as it falls to the floor.")
+			current_room.set_item(diamond)
+			inhabitant.owns = None
+		if inhabitant == davos and inhabitant.defeats == 5:
+			current_room.set_character(None)
+			terrace.set_character(davos)
+			print("You have won the game by defeating the zombie butler!", end="\n\n")
+			print("(You can still find the treasure...)")
+			
+			
 	elif command == "eat":
-		if "cheese" in backpack:
-			print("Delicious!")
-			backpack.remove("cheese")
-		else:
-			print("You haven't got any food.")
+		backpack = cheese.eat_it(backpack)
+			
 				
 	elif command =="smell":
-		if room_item is not None:
-			print(room_item.get_smell())
-			if room_item == orchid:
-				current_room.set_item(hyacinth)
-				room_item = hyacinth
-		else:
-			print("You cant't smell anything much.")
+		room_item.smell_it(current_room)
+	
 	
 	elif command in ["quit", "q"]:
 		break
+		
+		
 	else:
 		print("I don't understand.")
+		
+		
+		
+	# Set Teddy's advice
+	if ballroom.has_blocked_door == False:
+		teddy.set_conversation(teddy.says["davos"])
+	if not davos.owns == diamond:
+		teddy.set_conversation(teddy.says["diamond"])
+	if cora_friend.owns == diamond:
+		teddy.set_conversation(teddy.says["thanks"])
+	if "south" in dining_hall.linked_rooms:
+		teddy.set_conversation(teddy.says["treasure"])
+		
+		
+	
+	# Wait for input to allow previous activity to be read.
+	if command in ["eat", "fight", "give", "hug", "smell", "talk"]:
+		input("...")
+	elif current_room == ballroom and ballroom.has_blocked_door and command == "north":
+		input("...")
+		
+		
+		
+	# The game is won by reaching the vault.					
+	if current_room == vault:
+		print("You have won the game by finding the treasure!" + "\n")
+		break
