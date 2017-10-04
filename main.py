@@ -121,7 +121,7 @@ while True:
 		room_item.smell_it(current_room)
 		
 		if room_item.get_name() == "orchid":
-			current_room.set_item(room_item.get_alternative)
+			current_room.set_item(room_item.get_alternative())
 	
 	
 	elif command in ["quit", "q"]:
@@ -154,5 +154,7 @@ while True:
 		
 	# The game is won by reaching the vault.					
 	if current_room == vault:
+		print()
+		current_room.display_details()
 		print("You have won the game by finding the treasure!" + "\n")
 		break

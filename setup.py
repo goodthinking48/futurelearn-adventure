@@ -132,6 +132,5 @@ conservatory.link_room(terrace, "north")
 kitchen.set_item(broom)
 dining_hall.set_item(diamond)
 ballroom.set_item(torch)
-davos.defeats = 4
-
+davos.defeats = 3
 """

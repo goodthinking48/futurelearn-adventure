@@ -36,6 +36,7 @@ class Item():
 		"""Returns another Item object, which represents the
 		   current item after a command has changed it.
 		"""
+		return self.alternative
 		
 	def set_alternative(self, alternative):
 		"""alternative is another Item object, which represents the
