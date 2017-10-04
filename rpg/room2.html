@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module room2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>room2</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/deb/Desktop/FL_objects/Deborah_Love/rpg/room2.py">/home/deb/Desktop/FL_objects/Deborah_Love/rpg/room2.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="room2.html#Room">Room</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Room">class <strong>Room</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Room-__init__"><strong>__init__</strong></a>(self, room_name)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="Room-describe"><strong>describe</strong></a>(self)</dt><dd><tt>Prints&nbsp;a&nbsp;string&nbsp;describing&nbsp;the&nbsp;room.</tt></dd></dl>
+
+<dl><dt><a name="Room-display_details"><strong>display_details</strong></a>(self)</dt><dd><tt>Prints&nbsp;the&nbsp;name&nbsp;and&nbsp;description&nbsp;of&nbsp;the&nbsp;room,&nbsp;<br>
+and&nbsp;details&nbsp;of&nbsp;the&nbsp;exits&nbsp;to&nbsp;other&nbsp;rooms.</tt></dd></dl>
+
+<dl><dt><a name="Room-get_character"><strong>get_character</strong></a>(self)</dt><dd><tt>Returns&nbsp;a&nbsp;Character&nbsp;<a href="builtins.html#object">object</a>.&nbsp;There&nbsp;is&nbsp;a&nbsp;maximum&nbsp;of&nbsp;one&nbsp;character<br>
+per&nbsp;room.</tt></dd></dl>
+
+<dl><dt><a name="Room-get_description"><strong>get_description</strong></a>(self)</dt><dd><tt>Returns&nbsp;a&nbsp;string&nbsp;describing&nbsp;the&nbsp;room.</tt></dd></dl>
+
+<dl><dt><a name="Room-get_item"><strong>get_item</strong></a>(self)</dt><dd><tt>Returns&nbsp;an&nbsp;Item&nbsp;<a href="builtins.html#object">object</a>.&nbsp;There&nbsp;is&nbsp;a&nbsp;maximum&nbsp;of&nbsp;one&nbsp;item&nbsp;per&nbsp;room.</tt></dd></dl>
+
+<dl><dt><a name="Room-get_name"><strong>get_name</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;room&nbsp;as&nbsp;a&nbsp;string.</tt></dd></dl>
+
+<dl><dt><a name="Room-link_room"><strong>link_room</strong></a>(self, room_to_link, direction)</dt><dd><tt>Adds&nbsp;to&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;the&nbsp;form&nbsp;{"west":&nbsp;ballroom}<br>
+in&nbsp;which&nbsp;case,&nbsp;the&nbsp;command&nbsp;"west"&nbsp;moves&nbsp;the&nbsp;player<br>
+to&nbsp;the&nbsp;ballroom.</tt></dd></dl>
+
+<dl><dt><a name="Room-move"><strong>move</strong></a>(self, direction)</dt><dd><tt>direction&nbsp;is&nbsp;a&nbsp;string,&nbsp;e.g.&nbsp;"west"<br>
+If&nbsp;there&nbsp;is&nbsp;no&nbsp;exit&nbsp;in&nbsp;that&nbsp;direction,&nbsp;or&nbsp;the&nbsp;exit&nbsp;is&nbsp;blocked,<br>
+print&nbsp;a&nbsp;message,&nbsp;and&nbsp;return&nbsp;the&nbsp;current&nbsp;<a href="#Room">Room</a>&nbsp;<a href="builtins.html#object">object</a>.<br>
+Otherwise,&nbsp;return&nbsp;the&nbsp;<a href="#Room">Room</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;for&nbsp;that&nbsp;direction.</tt></dd></dl>
+
+<dl><dt><a name="Room-set_blocked_exit"><strong>set_blocked_exit</strong></a>(self, direction, message)</dt><dd><tt>This&nbsp;is&nbsp;used&nbsp;when&nbsp;a&nbsp;link&nbsp;to&nbsp;another&nbsp;room&nbsp;exists,&nbsp;but&nbsp;<br>
+the&nbsp;player&nbsp;must&nbsp;be&nbsp;prevented&nbsp;from&nbsp;going&nbsp;that&nbsp;way.<br>
+direction&nbsp;is&nbsp;a&nbsp;string,&nbsp;e.g.&nbsp;"west"<br>
+message&nbsp;is&nbsp;a&nbsp;string&nbsp;e.g.&nbsp;"The&nbsp;guard&nbsp;won't&nbsp;let&nbsp;you&nbsp;pass."</tt></dd></dl>
+
+<dl><dt><a name="Room-set_character"><strong>set_character</strong></a>(self, character_in_room)</dt><dd><tt>character_in_room&nbsp;is&nbsp;a&nbsp;Character&nbsp;<a href="builtins.html#object">object</a>.&nbsp;There&nbsp;is&nbsp;a&nbsp;maximum&nbsp;of<br>
+one&nbsp;character&nbsp;per&nbsp;room.</tt></dd></dl>
+
+<dl><dt><a name="Room-set_description"><strong>set_description</strong></a>(self, room_description)</dt><dd><tt>room_description&nbsp;is&nbsp;a&nbsp;string&nbsp;describing&nbsp;the&nbsp;room.</tt></dd></dl>
+
+<dl><dt><a name="Room-set_item"><strong>set_item</strong></a>(self, room_item)</dt><dd><tt>room_item&nbsp;is&nbsp;an&nbsp;Item&nbsp;<a href="builtins.html#object">object</a>.&nbsp;There&nbsp;is&nbsp;a&nbsp;maximum&nbsp;of<br>
+one&nbsp;item&nbsp;per&nbsp;room.</tt></dd></dl>
+
+<dl><dt><a name="Room-set_name"><strong>set_name</strong></a>(self, room_name)</dt><dd><tt>room_name&nbsp;is&nbsp;a&nbsp;string&nbsp;representing&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;room.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>

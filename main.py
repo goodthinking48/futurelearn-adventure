@@ -97,8 +97,9 @@ while True:
 		if not fight_won:
 			print("\n" + "Game over!" + "\n")
 			break
+			
 		if inhabitant == cora and inhabitant.defeats == 1:
-			ballroom.has_blocked_door = False
+			current_room.blocked_exit = None
 			backpack.remove("torch")
 		if inhabitant.owns == diamond and inhabitant.defeats == 4:
 			print("Something glitters as it falls to the floor.")
@@ -106,7 +107,8 @@ while True:
 			inhabitant.owns = None
 		if inhabitant == davos and inhabitant.defeats == 5:
 			current_room.set_character(None)
-			terrace.set_character(davos)
+			terrace.set_character(davos_neutral)
+			print()
 			print("You have won the game by defeating the zombie butler!", end="\n\n")
 			print("(You can still find the treasure...)")
 			
@@ -117,6 +119,9 @@ while True:
 				
 	elif command =="smell":
 		room_item.smell_it(current_room)
+		
+		if room_item.get_name() == "orchid":
+			current_room.set_item(room_item.get_alternative)
 	
 	
 	elif command in ["quit", "q"]:
@@ -141,9 +146,8 @@ while True:
 		
 	
 	# Wait for input to allow previous activity to be read.
-	if command in ["eat", "fight", "give", "hug", "smell", "talk"]:
-		input("...")
-	elif current_room == ballroom and ballroom.has_blocked_door and command == "north":
+	if command in ["eat", "fight", "give", "hug", "smell", "talk"] or (
+		current_room.blocked_exit is not None and command in current_room.blocked_exit):
 		input("...")
 		
 		

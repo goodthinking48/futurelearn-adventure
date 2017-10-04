@@ -15,7 +15,7 @@ hyacinth.set_smell("A strong, sweet scent.")
 orchid = rpg.Item("orchid", "A rare, indigo-blue orchid - very pretty.")
 orchid.set_smell("A strong, sweet scent. " + "\n" +
                  "Ohhhhhhhh... my mistake, it's a hyacinth.")
-orchid.set_alternate(hyacinth)
+orchid.set_alternative(hyacinth)
                  
 torch = rpg.Item("torch", "An ultra-bright electric torch.")
 
@@ -35,11 +35,13 @@ davos.set_attack_moves(["lurches forward, arms outstretched.",
                         
 davos.set_post_attack(4, "Davos trips on the broom and flies head over heels.")
 davos.set_post_attack(5, "Davos fixes you with a look of withering contempt, before" +
-                         "\n" + "hauling himself off to the terrace for a nice rest")
+                         "\n" + "hauling himself off to the terrace for a nice rest.")
 
 davos.set_weakness(broom)
 davos.set_wants(cheese)
 davos.set_owns(diamond)
+
+davos_neutral = rpg.Character("Davos", "A peaceful butler, having a rest.")
 
 cora_friend = rpg.Friend("Cora", "A blithe spirit.")
 cora_friend.set_conversation("I've opened the secret vault - have a look!")
@@ -77,7 +79,8 @@ dining_hall.set_character(teddy)
 
 ballroom = rpg.Room("Ballroom")
 ballroom.set_description("A vast room with a shining floor and splendid golden decorations.")
-ballroom.has_blocked_door = True
+ballroom.set_blocked_exit("north",
+                          "A whirlwind of icy air throws you back. Cora glares at you.")
 ballroom.set_character(cora)
 
 pantry = rpg.Room("Pantry")
@@ -121,4 +124,13 @@ ballroom.link_room(conservatory, "north")
 
 terrace.link_room(conservatory, "south")
 conservatory.link_room(terrace, "north")
+
+
+
+# Testing only
+
+kitchen.set_item(broom)
+dining_hall.set_item(diamond)
+ballroom.set_item(torch)
+davos.defeats = 4
 

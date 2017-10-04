@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module character</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>character</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/deb/Desktop/FL_objects/Deborah_Love/rpg/character.py">/home/deb/Desktop/FL_objects/Deborah_Love/rpg/character.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="character.html#Character">Character</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="character.html#Enemy">Enemy</a>
+</font></dt><dt><font face="helvetica, arial"><a href="character.html#Friend">Friend</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Character">class <strong>Character</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Character-__init__"><strong>__init__</strong></a>(self, char_name, char_description)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="Character-describe"><strong>describe</strong></a>(self)</dt><dd><tt>Prints&nbsp;the&nbsp;name&nbsp;and&nbsp;description&nbsp;of&nbsp;the&nbsp;character.</tt></dd></dl>
+
+<dl><dt><a name="Character-fight"><strong>fight</strong></a>(self, combat_item)</dt><dd><tt>Prints&nbsp;a&nbsp;default&nbsp;message&nbsp;and&nbsp;returns&nbsp;True</tt></dd></dl>
+
+<dl><dt><a name="Character-give"><strong>give</strong></a>(self, gift_item, current_room)</dt><dd><tt>Prints&nbsp;a&nbsp;default&nbsp;message.</tt></dd></dl>
+
+<dl><dt><a name="Character-hug"><strong>hug</strong></a>(self)</dt><dd><tt>Prints&nbsp;a&nbsp;default&nbsp;message.</tt></dd></dl>
+
+<dl><dt><a name="Character-set_conversation"><strong>set_conversation</strong></a>(self, conversation)</dt><dd><tt>conversation&nbsp;is&nbsp;a&nbsp;string&nbsp;representing&nbsp;one&nbsp;reply&nbsp;from&nbsp;the&nbsp;character.</tt></dd></dl>
+
+<dl><dt><a name="Character-set_owns"><strong>set_owns</strong></a>(self, item_object)</dt><dd><tt>item_object&nbsp;is&nbsp;an&nbsp;Item&nbsp;<a href="builtins.html#object">object</a>.<br>
+A&nbsp;character&nbsp;can&nbsp;own&nbsp;an&nbsp;item&nbsp;regardless&nbsp;of&nbsp;where&nbsp;the&nbsp;item&nbsp;is.</tt></dd></dl>
+
+<dl><dt><a name="Character-talk"><strong>talk</strong></a>(self)</dt><dd><tt>Prints&nbsp;the&nbsp;character's&nbsp;conversation,&nbsp;or,&nbsp;if&nbsp;none&nbsp;exists,<br>
+prints&nbsp;a&nbsp;default&nbsp;message.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Enemy">class <strong>Enemy</strong></a>(<a href="character.html#Character">Character</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="character.html#Enemy">Enemy</a></dd>
+<dd><a href="character.html#Character">Character</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Enemy-__init__"><strong>__init__</strong></a>(self, char_name, char_description)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="Enemy-fight"><strong>fight</strong></a>(self, combat_item)</dt><dd><tt>combat_item&nbsp;is&nbsp;a&nbsp;string&nbsp;representing&nbsp;the&nbsp;name&nbsp;of&nbsp;an&nbsp;Item&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;&nbsp;If&nbsp;defined,&nbsp;print&nbsp;the&nbsp;pre-fight&nbsp;message&nbsp;corresponding&nbsp;to&nbsp;the&nbsp;<br>
+current&nbsp;number&nbsp;of&nbsp;character&nbsp;defeats.<br>
+&nbsp;&nbsp;Print&nbsp;a&nbsp;description&nbsp;of&nbsp;the&nbsp;fight&nbsp;being&nbsp;won&nbsp;or&nbsp;lost.<br>
+&nbsp;&nbsp;If&nbsp;defined,&nbsp;print&nbsp;the&nbsp;after-fight&nbsp;message&nbsp;corresponding&nbsp;to&nbsp;the<br>
+updated&nbsp;number&nbsp;of&nbsp;character&nbsp;defeats.<br>
+&nbsp;&nbsp;Return&nbsp;True&nbsp;if&nbsp;the&nbsp;player&nbsp;wins,&nbsp;otherwise&nbsp;False.</tt></dd></dl>
+
+<dl><dt><a name="Enemy-get_alter_ego"><strong>get_alter_ego</strong></a>(self)</dt><dd><tt>Returns&nbsp;a&nbsp;<a href="#Character">Character</a>&nbsp;<a href="builtins.html#object">object</a>,&nbsp;representing&nbsp;the&nbsp;current&nbsp;<br>
+character&nbsp;after&nbsp;being&nbsp;changed&nbsp;by&nbsp;a&nbsp;command.</tt></dd></dl>
+
+<dl><dt><a name="Enemy-get_wants"><strong>get_wants</strong></a>(self)</dt><dd><tt>Returns&nbsp;an&nbsp;Item&nbsp;<a href="builtins.html#object">object</a>&nbsp;(the&nbsp;item&nbsp;the&nbsp;character&nbsp;wants)</tt></dd></dl>
+
+<dl><dt><a name="Enemy-get_weakness"><strong>get_weakness</strong></a>(self)</dt><dd><tt>Returns&nbsp;an&nbsp;Item&nbsp;<a href="builtins.html#object">object</a>,&nbsp;representing&nbsp;the&nbsp;weapon&nbsp;<br>
+that&nbsp;defeats&nbsp;the&nbsp;character&nbsp;in&nbsp;a&nbsp;fight.</tt></dd></dl>
+
+<dl><dt><a name="Enemy-give"><strong>give</strong></a>(self, gift_item, current_room)</dt><dd><tt>gift_item&nbsp;is&nbsp;an&nbsp;Item&nbsp;<a href="builtins.html#object">object</a>,&nbsp;current_room&nbsp;is&nbsp;the&nbsp;current&nbsp;Room&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;&nbsp;Prints&nbsp;an&nbsp;appropriate&nbsp;message.<br>
+&nbsp;&nbsp;An&nbsp;accepted&nbsp;gift&nbsp;has&nbsp;the&nbsp;effect&nbsp;of&nbsp;switching&nbsp;the&nbsp;current&nbsp;character<br>
+with&nbsp;another&nbsp;<a href="#Character">Character</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;if&nbsp;one&nbsp;is&nbsp;defined&nbsp;in&nbsp;self.<strong>alter_ego</strong>).<br>
+&nbsp;&nbsp;Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;gift&nbsp;is&nbsp;accepted,&nbsp;otherwise&nbsp;False.</tt></dd></dl>
+
+<dl><dt><a name="Enemy-set_alter_ego"><strong>set_alter_ego</strong></a>(self, character)</dt><dd><tt>character&nbsp;is&nbsp;a&nbsp;<a href="#Character">Character</a>&nbsp;<a href="builtins.html#object">object</a>,&nbsp;representing&nbsp;the&nbsp;current<br>
+character&nbsp;after&nbsp;being&nbsp;changed&nbsp;by&nbsp;a&nbsp;command.</tt></dd></dl>
+
+<dl><dt><a name="Enemy-set_attack_moves"><strong>set_attack_moves</strong></a>(self, list_of_moves)</dt><dd><tt>list_of_moves&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;strings&nbsp;describing&nbsp;how&nbsp;the&nbsp;character&nbsp;<br>
+attacks.&nbsp;One&nbsp;message&nbsp;will&nbsp;be&nbsp;printed&nbsp;before&nbsp;each&nbsp;round&nbsp;of&nbsp;combat.</tt></dd></dl>
+
+<dl><dt><a name="Enemy-set_post_attack"><strong>set_post_attack</strong></a>(self, defeat_num, message)</dt><dd><tt>Adds&nbsp;to&nbsp;a&nbsp;dictionary&nbsp;for&nbsp;which&nbsp;the&nbsp;keys&nbsp;(defeat_num)&nbsp;are&nbsp;integers&nbsp;<br>
+representing&nbsp;the&nbsp;number&nbsp;of&nbsp;times&nbsp;the&nbsp;character&nbsp;has&nbsp;been&nbsp;defeated,&nbsp;<br>
+and&nbsp;the&nbsp;values&nbsp;(message)&nbsp;are&nbsp;strings&nbsp;describing&nbsp;the&nbsp;character's<br>
+reaction&nbsp;following&nbsp;combat.</tt></dd></dl>
+
+<dl><dt><a name="Enemy-set_wants"><strong>set_wants</strong></a>(self, char_wants)</dt><dd><tt>char_wants&nbsp;is&nbsp;an&nbsp;Item&nbsp;<a href="builtins.html#object">object</a>&nbsp;(the&nbsp;item&nbsp;the&nbsp;character&nbsp;wants)</tt></dd></dl>
+
+<dl><dt><a name="Enemy-set_weakness"><strong>set_weakness</strong></a>(self, char_weakness)</dt><dd><tt>char_weakness&nbsp;is&nbsp;an&nbsp;Item&nbsp;<a href="builtins.html#object">object</a>,&nbsp;representing&nbsp;the&nbsp;weapon<br>
+that&nbsp;defeats&nbsp;the&nbsp;character&nbsp;in&nbsp;a&nbsp;fight.</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>combat_wins</strong> = 0</dl>
+
+<hr>
+Methods inherited from <a href="character.html#Character">Character</a>:<br>
+<dl><dt><a name="Enemy-describe"><strong>describe</strong></a>(self)</dt><dd><tt>Prints&nbsp;the&nbsp;name&nbsp;and&nbsp;description&nbsp;of&nbsp;the&nbsp;character.</tt></dd></dl>
+
+<dl><dt><a name="Enemy-hug"><strong>hug</strong></a>(self)</dt><dd><tt>Prints&nbsp;a&nbsp;default&nbsp;message.</tt></dd></dl>
+
+<dl><dt><a name="Enemy-set_conversation"><strong>set_conversation</strong></a>(self, conversation)</dt><dd><tt>conversation&nbsp;is&nbsp;a&nbsp;string&nbsp;representing&nbsp;one&nbsp;reply&nbsp;from&nbsp;the&nbsp;character.</tt></dd></dl>
+
+<dl><dt><a name="Enemy-set_owns"><strong>set_owns</strong></a>(self, item_object)</dt><dd><tt>item_object&nbsp;is&nbsp;an&nbsp;Item&nbsp;<a href="builtins.html#object">object</a>.<br>
+A&nbsp;character&nbsp;can&nbsp;own&nbsp;an&nbsp;item&nbsp;regardless&nbsp;of&nbsp;where&nbsp;the&nbsp;item&nbsp;is.</tt></dd></dl>
+
+<dl><dt><a name="Enemy-talk"><strong>talk</strong></a>(self)</dt><dd><tt>Prints&nbsp;the&nbsp;character's&nbsp;conversation,&nbsp;or,&nbsp;if&nbsp;none&nbsp;exists,<br>
+prints&nbsp;a&nbsp;default&nbsp;message.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="character.html#Character">Character</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Friend">class <strong>Friend</strong></a>(<a href="character.html#Character">Character</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="character.html#Friend">Friend</a></dd>
+<dd><a href="character.html#Character">Character</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Friend-__init__"><strong>__init__</strong></a>(self, char_name, char_description)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="Friend-hug"><strong>hug</strong></a>(self)</dt><dd><tt>Print&nbsp;a&nbsp;default&nbsp;message.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="character.html#Character">Character</a>:<br>
+<dl><dt><a name="Friend-describe"><strong>describe</strong></a>(self)</dt><dd><tt>Prints&nbsp;the&nbsp;name&nbsp;and&nbsp;description&nbsp;of&nbsp;the&nbsp;character.</tt></dd></dl>
+
+<dl><dt><a name="Friend-fight"><strong>fight</strong></a>(self, combat_item)</dt><dd><tt>Prints&nbsp;a&nbsp;default&nbsp;message&nbsp;and&nbsp;returns&nbsp;True</tt></dd></dl>
+
+<dl><dt><a name="Friend-give"><strong>give</strong></a>(self, gift_item, current_room)</dt><dd><tt>Prints&nbsp;a&nbsp;default&nbsp;message.</tt></dd></dl>
+
+<dl><dt><a name="Friend-set_conversation"><strong>set_conversation</strong></a>(self, conversation)</dt><dd><tt>conversation&nbsp;is&nbsp;a&nbsp;string&nbsp;representing&nbsp;one&nbsp;reply&nbsp;from&nbsp;the&nbsp;character.</tt></dd></dl>
+
+<dl><dt><a name="Friend-set_owns"><strong>set_owns</strong></a>(self, item_object)</dt><dd><tt>item_object&nbsp;is&nbsp;an&nbsp;Item&nbsp;<a href="builtins.html#object">object</a>.<br>
+A&nbsp;character&nbsp;can&nbsp;own&nbsp;an&nbsp;item&nbsp;regardless&nbsp;of&nbsp;where&nbsp;the&nbsp;item&nbsp;is.</tt></dd></dl>
+
+<dl><dt><a name="Friend-talk"><strong>talk</strong></a>(self)</dt><dd><tt>Prints&nbsp;the&nbsp;character's&nbsp;conversation,&nbsp;or,&nbsp;if&nbsp;none&nbsp;exists,<br>
+prints&nbsp;a&nbsp;default&nbsp;message.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="character.html#Character">Character</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>
